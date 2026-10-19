@@ -1,0 +1,486 @@
+/**
+ * Bullet Gallery - front end styles.
+ */
+
+.bgal {
+	--bgal-accent: #efa31d;
+	--bgal-heading: #1f4d3a;
+	--bgal-text: #6b7f73;
+	--bgal-card: 320px;
+	--bgal-gap: 14px;
+	--bgal-max: 1200px;
+	--bgal-ratio: 4 / 3;
+	--bgal-radius: 2px;
+}
+
+.bgal * {
+	box-sizing: border-box;
+}
+
+.bgal-section {
+	background: var(--bgal-bg, transparent);
+	padding: 56px 0;
+	scroll-margin-top: 90px;
+}
+
+.bgal-section + .bgal-section {
+	padding-top: 56px;
+}
+
+.bgal-inner {
+	max-width: var(--bgal-max);
+	margin: 0 auto;
+	padding: 0 20px;
+}
+
+/* ---------------- heading ---------------- */
+
+.bgal-head {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 16px;
+	margin: 0 0 6px;
+}
+
+.bgal-title {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin: 0;
+	font-size: 22px;
+	line-height: 1.3;
+	color: var(--bgal-heading);
+}
+
+.bgal-mark {
+	display: inline-block;
+	flex: 0 0 auto;
+	width: 12px;
+	height: 12px;
+	border: 2px solid var(--bgal-accent);
+	border-radius: 2px;
+}
+
+.bgal-count {
+	flex: 0 0 auto;
+	font-size: 12px;
+	font-weight: 500;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: var(--bgal-accent);
+	white-space: nowrap;
+}
+
+.bgal-intro {
+	max-width: 68ch;
+	margin: 0 0 20px;
+	font-size: 15px;
+	line-height: 1.7;
+	color: var(--bgal-text);
+}
+
+.bgal-head + .bgal-track {
+	margin-top: 20px;
+}
+
+/* ---------------- track ---------------- */
+
+.bgal-track {
+	display: flex;
+	gap: var(--bgal-gap);
+	overflow-x: auto;
+	overscroll-behavior-x: contain;
+	scroll-snap-type: x proximity;
+	scroll-behavior: smooth;
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+	-webkit-overflow-scrolling: touch;
+	padding-bottom: 2px;
+}
+
+.bgal-track::-webkit-scrollbar {
+	display: none;
+}
+
+.bgal-item {
+	position: relative;
+	display: block;
+	flex: 0 0 var(--bgal-card);
+	max-width: var(--bgal-card);
+	margin: 0;
+	overflow: hidden;
+	border-radius: var(--bgal-radius);
+	scroll-snap-align: start;
+	background: rgba(0, 0, 0, 0.04);
+	text-decoration: none;
+	cursor: zoom-in;
+}
+
+figure.bgal-item {
+	cursor: default;
+}
+
+.bgal-item .bgal-img {
+	display: block;
+	width: 100%;
+	height: auto;
+	aspect-ratio: var(--bgal-ratio);
+	object-fit: cover;
+	transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.bgal-item::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(180deg, rgba(0, 0, 0, 0) 45%, rgba(0, 0, 0, 0.62) 100%);
+	opacity: 0;
+	transition: opacity 0.4s ease;
+	pointer-events: none;
+}
+
+.bgal-item:hover .bgal-img,
+.bgal-item:focus-visible .bgal-img {
+	transform: scale(1.06);
+}
+
+.bgal-item:focus-visible {
+	outline: 2px solid var(--bgal-accent);
+	outline-offset: 3px;
+}
+
+.bgal-cap {
+	position: absolute;
+	right: 14px;
+	bottom: 12px;
+	left: 14px;
+	z-index: 2;
+	font-size: 13px;
+	line-height: 1.45;
+	color: #fff;
+	text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+	opacity: 0;
+	transform: translateY(6px);
+	transition: opacity 0.35s ease, transform 0.35s ease;
+	pointer-events: none;
+}
+
+.bgal-section--cap-hover .bgal-item:hover::after,
+.bgal-section--cap-hover .bgal-item:focus-visible::after,
+.bgal-section--cap-always .bgal-item::after {
+	opacity: 1;
+}
+
+.bgal-section--cap-hover .bgal-item:hover .bgal-cap,
+.bgal-section--cap-hover .bgal-item:focus-visible .bgal-cap,
+.bgal-section--cap-always .bgal-cap {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+.bgal-section--cap-none .bgal-cap {
+	display: none;
+}
+
+/* ---------------- nav ---------------- */
+
+.bgal-nav {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	margin-top: 18px;
+}
+
+.bgal .bgal-arrow {
+	flex: 0 0 36px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 36px;
+	height: 36px;
+	min-width: 36px;
+	min-height: 36px;
+	max-width: 36px;
+	padding: 0;
+	margin: 0;
+	border: 1px solid var(--bgal-accent);
+	border-radius: 50%;
+	background: transparent;
+	background-color: transparent;
+	box-shadow: none;
+	color: var(--bgal-accent);
+	font-size: 15px;
+	font-weight: 400;
+	line-height: 1;
+	text-decoration: none;
+	text-transform: none;
+	letter-spacing: 0;
+	cursor: pointer;
+	-webkit-appearance: none;
+	appearance: none;
+	transition: background-color 0.25s ease, color 0.25s ease, opacity 0.25s ease;
+}
+
+.bgal .bgal-arrow > span {
+	display: block;
+	line-height: 1;
+	transform: translateY(-1px);
+}
+
+.bgal .bgal-arrow:hover:not([disabled]),
+.bgal .bgal-arrow:focus-visible:not([disabled]) {
+	background-color: var(--bgal-accent);
+	color: #fff;
+}
+
+.bgal .bgal-arrow[disabled] {
+	opacity: 0.28;
+	cursor: default;
+	background-color: transparent;
+	color: var(--bgal-accent);
+}
+
+.bgal-bar {
+	position: relative;
+	flex: 1 1 auto;
+	min-width: 0;
+	height: 3px;
+	border-radius: 3px;
+	background: rgba(0, 0, 0, 0.1);
+	overflow: hidden;
+}
+
+.bgal-bar__fill {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 30%;
+	border-radius: 3px;
+	background: var(--bgal-accent);
+	will-change: transform;
+	transition: width 0.2s ease;
+}
+
+.bgal-track.is-grabbing {
+	cursor: grabbing;
+	scroll-behavior: auto;
+	scroll-snap-type: none;
+}
+
+.bgal-track.is-grabbing .bgal-item {
+	cursor: grabbing;
+}
+
+.bgal-item img {
+	-webkit-user-drag: none;
+	user-select: none;
+}
+
+/* ---------------- lightbox ---------------- */
+
+.bgal-lb {
+	position: fixed;
+	inset: 0;
+	z-index: 99999;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 24px;
+	background: rgba(10, 16, 13, 0.94);
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.28s ease, visibility 0.28s ease;
+}
+
+.bgal-lb.is-open {
+	opacity: 1;
+	visibility: visible;
+}
+
+.bgal-lb__img {
+	max-width: min(1200px, 92vw);
+	max-height: 82vh;
+	width: auto;
+	height: auto;
+	object-fit: contain;
+	border-radius: 2px;
+}
+
+.bgal-lb__caption {
+	position: absolute;
+	right: 24px;
+	bottom: 56px;
+	left: 24px;
+	margin: 0;
+	font-size: 14px;
+	line-height: 1.6;
+	color: rgba(255, 255, 255, 0.86);
+	text-align: center;
+}
+
+.bgal-lb__counter {
+	position: absolute;
+	bottom: 22px;
+	left: 50%;
+	transform: translateX(-50%);
+	font-size: 12px;
+	letter-spacing: 0.12em;
+	color: rgba(255, 255, 255, 0.6);
+}
+
+.bgal-lb__btn {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 44px;
+	height: 44px;
+	padding: 0;
+	border: 1px solid rgba(255, 255, 255, 0.28);
+	border-radius: 50%;
+	background: rgba(0, 0, 0, 0.25);
+	color: #fff;
+	font-size: 18px;
+	line-height: 1;
+	cursor: pointer;
+	transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.bgal-lb__btn:hover,
+.bgal-lb__btn:focus-visible {
+	background: rgba(255, 255, 255, 0.16);
+	border-color: rgba(255, 255, 255, 0.6);
+}
+
+.bgal-lb__close {
+	top: 20px;
+	right: 20px;
+}
+
+.bgal-lb__prev {
+	top: 50%;
+	left: 20px;
+	transform: translateY(-50%);
+}
+
+.bgal-lb__next {
+	top: 50%;
+	right: 20px;
+	transform: translateY(-50%);
+}
+
+body.bgal-lb-open {
+	overflow: hidden;
+}
+
+/* ---------------- responsive ---------------- */
+
+@media (max-width: 1024px) {
+	.bgal-section {
+		padding: 44px 0;
+	}
+
+	.bgal-title {
+		font-size: 20px;
+	}
+}
+
+@media (max-width: 767px) {
+	.bgal {
+		--bgal-card: 68vw;
+		--bgal-gap: 8px;
+		--bgal-ratio: 3 / 2;
+	}
+
+	.bgal-inner {
+		padding: 0 16px;
+	}
+
+	.bgal-section {
+		padding: 22px 0;
+	}
+
+	.bgal-section:first-child {
+		padding-top: 28px;
+	}
+
+	.bgal-title {
+		font-size: 18px;
+	}
+
+	.bgal-head {
+		flex-wrap: wrap;
+		gap: 2px 12px;
+		margin-bottom: 2px;
+	}
+
+	.bgal-head + .bgal-track {
+		margin-top: 12px;
+	}
+
+	.bgal-intro {
+		margin-bottom: 12px;
+		font-size: 14px;
+	}
+
+	.bgal-cap {
+		right: 10px;
+		bottom: 8px;
+		left: 10px;
+		font-size: 12px;
+	}
+
+	/* Arrows are pointless on touch, so the row collapses to a slim bar. */
+	.bgal-nav {
+		margin-top: 10px;
+		gap: 0;
+	}
+
+	.bgal .bgal-arrow {
+		display: none;
+	}
+
+	.bgal-bar {
+		height: 2px;
+	}
+
+	.bgal-lb__prev,
+	.bgal-lb__next {
+		top: auto;
+		bottom: 20px;
+		transform: none;
+	}
+
+	.bgal-lb__next {
+		right: 20px;
+	}
+
+	.bgal-lb__prev {
+		left: 20px;
+	}
+
+	.bgal-lb__counter {
+		bottom: 34px;
+	}
+
+	.bgal-lb__caption {
+		bottom: 74px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.bgal-track {
+		scroll-behavior: auto;
+	}
+
+	.bgal *,
+	.bgal-lb * {
+		transition: none !important;
+	}
+
+	.bgal-item:hover .bgal-img {
+		transform: none;
+	}
+}
